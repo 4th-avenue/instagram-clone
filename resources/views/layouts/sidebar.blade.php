@@ -3,8 +3,8 @@
         shrink: false,
         drawer: false
     }"
-    class="menu p-3   w-20 overflow-x-hidden h-full grid bg-white border-r text-base-content"
-    :class="{'w-72 ':!shrink}">
+    class="menu p-3 overflow-x-hidden h-full grid bg-white border-r text-base-content"
+    :class="shrink ? 'w-20' : 'w-72'">
 
     {{--Logo--}}
     <div class="pt-3">
