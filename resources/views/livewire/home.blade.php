@@ -19,8 +19,51 @@
             </section>
         </aside>
 
-        {{-- sugestions --}}
         <aside class="lg:col-span-4 border hidden lg:block p-4">
+            <div class="flex items-center gap-2">
+                <x-avatar src="https://source.unsplash.com/500x500?face" class="h-12 w-12" />
+                <h4 class="font-medium">{{ fake()->name }}</h4>
+            </div>
+
+            {{-- Suggestions --}}
+            <section class="mt-4">
+                <h4 class="font-bold text-gray-700/95">Suggestions for you</h4>
+
+                <ul class="my-2 space-y-3">
+                    <li class="flex items-center gap-3">
+                        <x-avatar src="https://source.unsplash.com/500x500?face" class="h-12 w-12" />
+
+                        <div class="grid grid-cols-7 w-full gap-2">
+                            <div class="col-span-5">
+                                <h5 class="font-semibold truncate text-sm">{{ fake()->name }}</h5>
+                                <p class="text-xs truncate">Followed by {{ fake()->name }}</p>
+                            </div>
+
+                            <div class="col-span-2 flex text-right justify-end">
+                                <button class="font-bold text-blue-500 ml-auto text-sm">Follow</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            {{-- App links --}}
+            <section class="mt-5">
+                <ol class="flex gap-2 flex-wrap">
+                    <li class="text-xs text-gray-800/90 font-medium"><a href="#" class="hover:underline">About</a></li>
+                    <li class="text-xs text-gray-800/90 font-medium"><a href="#" class="hover:underline">Help</a></li>
+                    <li class="text-xs text-gray-800/90 font-medium"><a href="#" class="hover:underline">Press</a></li>
+                    <li class="text-xs text-gray-800/90 font-medium"><a href="#" class="hover:underline">API</a></li>
+                    <li class="text-xs text-gray-800/90 font-medium"><a href="#" class="hover:underline">Jobs</a></li>
+                    <li class="text-xs text-gray-800/90 font-medium"><a href="#" class="hover:underline">Privacy</a></li>
+                    <li class="text-xs text-gray-800/90 font-medium"><a href="#" class="hover:underline">Terms</a></li>
+                    <li class="text-xs text-gray-800/90 font-medium"><a href="#" class="hover:underline">Locations</a></li>
+                    <li class="text-xs text-gray-800/90 font-medium"><a href="#" class="hover:underline">Language</a></li>
+                    <li class="text-xs text-gray-800/90 font-medium"><a href="#" class="hover:underline">Meta Verified</a></li>
+                </ol>
+
+                <h3 class="text-gray-800/90 mt-6 text-sm">@ 2025 INTAGRAM COURSE</h3>
+            </section>
         </aside>
     </main>
 </div>
