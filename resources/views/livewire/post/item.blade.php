@@ -20,7 +20,11 @@
     </header>
 
     {{-- main --}}
-    <main></main>
+    <main>
+        <div class="my-2">
+            <x-video />
+        </div>
+    </main>
 
     {{-- footer --}}
     <footer></footer>
