@@ -8,4 +8,11 @@ import 'swiper/css/pagination';
 
 const swiper = new Swiper('.swiper', {
     modules: [Navigation, Pagination],
+    pagination: {
+        el: '.swiper-pagination',
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
 });
