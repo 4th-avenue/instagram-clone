@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
