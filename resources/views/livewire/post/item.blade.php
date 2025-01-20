@@ -5,7 +5,7 @@
 
         <div class="grid grid-cols-7 w-full gap-2">
             <div class="col-span-5">
-                <h5 class="font-semibold truncate text-sm"> {{ fake()->name }} </h5>
+                <h5 class="font-semibold truncate text-sm"> {{ $post->user->name }} </h5>
             </div>
 
             <div class="col-span-2 flex text-right justify-end">
@@ -33,34 +33,45 @@
                 },
             })" class="swiper h-[500px] border bg-white">
                 <!-- Additional required wrapper -->
-                <div x-cloak class="swiper-wrapper">
+                <ul x-cloak class="swiper-wrapper">
                     <!-- Slides -->
-                    <div class="swiper-slide"><x-video /></div>
-                    <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1545024602-5ac8042e0bc5?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="크리스마스 풍경" class="h-[500px] w-full block object-scale-down"></div>
-                    <div class="swiper-slide"><img src="https://plus.unsplash.com/premium_photo-1661395026802-fe9bb80501b9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="크리스마스 풍경" class="h-[500px] w-full block object-scale-down"></div>
-                    <div class="swiper-slide"><img src="https://plus.unsplash.com/premium_photo-1661395191421-0e80fbf5ca81?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="크리스마스 풍경" class="h-[500px] w-full block object-scale-down"></div>
-                </div>
+                    @foreach ($post->media as $file)
+                    <li class="swiper-slide">
+                        @switch($file->mime)
+                            @case('video')
+                                <x-video source="{{ $file->url }}" />
+                                @break
+                            @case('image')
+                                <img src="{{ $file->url }}" alt="" class="h-[500px] w-full block object-scale-down">
+                                @break
+                            @default
+                        @endswitch
+                    </li>
+                    @endforeach
+                </ul>
 
                 <!-- If we need pagination -->
                 <div class="swiper-pagination"></div>
 
-                {{-- prev --}}
-                <div class="swiper-button-prev absolute top-1/2 z-10 p-2 transform -translate-y-1/2">
-                    <div class="bg-white/95 border p-1 rounded-full test-gray-900">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.8" stroke="currentColor" class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                        </svg>
+                @if (count($post->media) > 1)
+                    {{-- prev --}}
+                    <div class="swiper-button-prev absolute top-1/2 z-10 p-2 transform -translate-y-1/2">
+                        <div class="bg-white/95 border p-1 rounded-full test-gray-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.8" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                            </svg>
+                        </div>
                     </div>
-                </div>
 
-                {{-- next --}}
-                <div class="swiper-button-next absolute right-0 top-1/2 z-10 p-2 transform -translate-y-1/2">
-                    <div class="bg-white/95 border p-1 rounded-full test-gray-900">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.8" stroke="currentColor" class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                        </svg>
+                    {{-- next --}}
+                    <div class="swiper-button-next absolute right-0 top-1/2 z-10 p-2 transform -translate-y-1/2">
+                        <div class="bg-white/95 border p-1 rounded-full test-gray-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.8" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </div>
                     </div>
-                </div>
+                @endif
 
                 <!-- If we need scrollbar -->
                 <div class="swiper-scrollbar"></div>
@@ -102,8 +113,8 @@
         {{-- name and comment --}}
         <div class="flex text-sm gap-2 font-medium">
             <p>
-                <strong class="font-bold">{{ fake()->name }}</strong>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo nulla cumque voluptates magnam explicabo ipsum voluptate quae neque cupiditate nesciunt! Magnam inventore corrupti iste, eos assumenda nobis non optio! Dicta.
+                <strong class="font-bold">{{ $post->user->name }}</strong>
+                    {{ $post->description }}
             </p>
         </div>
 
