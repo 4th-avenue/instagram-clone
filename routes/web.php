@@ -4,6 +4,7 @@ use App\Livewire\Home;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)
+    ->middleware('auth')
     ->name('/');
 
 Route::view('dashboard', 'dashboard')
