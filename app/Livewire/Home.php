@@ -10,6 +10,10 @@ class Home extends Component
 {
     public $posts;
 
+    public $canLoadMore;
+    public $perPageIncrements = 5;
+    public $perPage = 10;
+
     #[On('closeModal')]
     public function reverseUrl()
     {
@@ -23,9 +27,32 @@ class Home extends Component
         $this->posts = $this->posts->prepend($post);
     }
 
+    public function loadMore()
+    {
+        if (!$this->canLoadMore) {
+            return null;
+        }
+
+        // increment page
+        $this->perPage += $this->perPageIncrements;
+
+        // load posts
+        $this->loadPosts();
+    }
+
+    // function to load posts 
+    function loadPosts()
+    {
+        $this->posts = Post::with('comments.replies')
+            ->latest()
+            ->take($this->perPage)->get();
+
+        $this->canLoadMore = (count($this->posts) >= $this->perPage);
+    }
+
     public function mount()
     {
-        $this->posts = Post::with('comments')->latest()->get();
+        $this->loadPosts();
     }
 
     public function render()
