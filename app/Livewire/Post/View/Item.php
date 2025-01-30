@@ -11,6 +11,10 @@ class Item extends Component
 
     public function render()
     {
-        return view('livewire.post.view.item');
+        $comments = $this->post->comments;
+
+        return view('livewire.post.view.item', [
+            'comments' => $comments
+        ]);
     }
 }
