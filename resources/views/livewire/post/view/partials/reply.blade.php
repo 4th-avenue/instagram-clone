@@ -33,3 +33,10 @@
         </div>
     </div>
 </div>
+
+@if ($reply->replies->count() > 0)
+    @foreach ($reply->replies as $reply)
+        {{-- Reply --}}
+        @include('livewire.post.view.partials.reply')
+    @endforeach
+@endif
