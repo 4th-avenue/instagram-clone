@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Overtrue\LaravelLike\Traits\Liker;
 use Illuminate\Notifications\Notifiable;
+use Overtrue\LaravelFavorite\Traits\Favoriter;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, Liker;
+    use HasFactory, Notifiable, Liker, Favoriter;
 
     /**
      * The attributes that are mass assignable.
