@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Post;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -50,6 +51,13 @@ class Home extends Component
         $this->canLoadMore = (count($this->posts) >= $this->perPage);
     }
 
+    public function toggleFollow(User $user)
+    {
+        abort_unless(auth()->check(), 401);
+
+        auth()->user()->toggleFollow($user);
+    }
+
     public function mount()
     {
         $this->loadPosts();
@@ -57,6 +65,9 @@ class Home extends Component
 
     public function render()
     {
-        return view('livewire.home')->layout('layouts.app');
+        $suggestedUsers = User::limit(5)->get();
+        return view('livewire.home', [
+            'suggestedUsers' => $suggestedUsers
+        ])->layout('layouts.app');
     }
 }

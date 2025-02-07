@@ -42,7 +42,7 @@ class="w-full h-full">
                 <ul class="flex overflow-x-auto scrollbar-hide items-center gap-2">
                     @for ($i = 0; $i < 10; $i++)
                     <li class="flex flex-col justify-center w-20 gap-1 p-2">
-                        <x-avatar story src="https://source.unsplash.com/500x500?face-{{$i}}" class="h-14 w-14" />
+                        <x-avatar wire:ignore story src="https://source.unsplash.com/500x500?face-{{$i}}" class="h-14 w-14" />
                         <p class="text-xs font-medium truncate">{{ fake()->name }}</p>
                     </li>
                     @endfor
@@ -63,7 +63,7 @@ class="w-full h-full">
 
         <aside class="lg:col-span-4 hidden lg:block p-4">
             <div class="flex items-center gap-2">
-                <x-avatar src="https://source.unsplash.com/500x500?face" class="h-12 w-12" />
+                <x-avatar wire:ignore src="https://source.unsplash.com/500x500?face" class="h-12 w-12" />
                 <h4 class="font-medium">{{ fake()->name }}</h4>
             </div>
 
@@ -72,22 +72,26 @@ class="w-full h-full">
                 <h4 class="font-bold text-gray-700/95">Suggestions for you</h4>
 
                 <ul class="my-2 space-y-3">
-                    @for ($i = 0; $i < 5; $i++)
+                    @foreach ($suggestedUsers as $key => $user)
                     <li class="flex items-center gap-3">
-                        <x-avatar src="https://source.unsplash.com/500x500?face-{{$i}}" class="h-12 w-12" />
+                        <x-avatar wire:ignore src="https://source.unsplash.com/500x500?face-{{$key}}" class="h-12 w-12" />
 
                         <div class="grid grid-cols-7 w-full gap-2">
                             <div class="col-span-5">
-                                <h5 class="font-semibold truncate text-sm">{{ fake()->name }}</h5>
-                                <p class="text-xs truncate">Followed by {{ fake()->name }}</p>
+                                <h5 class="font-semibold truncate text-sm">{{ $user->name }}</h5>
+                                <p class="text-xs truncate" wire:ignore>Followed by {{ fake()->name }}</p>
                             </div>
 
                             <div class="col-span-2 flex text-right justify-end">
-                                <button class="font-bold text-blue-500 ml-auto text-sm">Follow</button>
+                                @if (auth()->user()->isFollowing($user))
+                                    <button wire:click="toggleFollow({{ $user->id }})" class="font-bold text-blue-500 ml-auto text-sm">Following</button>
+                                @else
+                                    <button wire:click="toggleFollow({{ $user->id }})" class="font-bold text-blue-500 ml-auto text-sm">Follow</button>
+                                @endif
                             </div>
                         </div>
                     </li>
-                    @endfor
+                    @endforeach
                 </ul>
             </section>
 
