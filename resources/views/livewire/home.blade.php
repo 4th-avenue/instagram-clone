@@ -74,11 +74,13 @@ class="w-full h-full">
                 <ul class="my-2 space-y-3">
                     @foreach ($suggestedUsers as $key => $user)
                     <li class="flex items-center gap-3">
-                        <x-avatar wire:ignore src="https://source.unsplash.com/500x500?face-{{$key}}" class="h-12 w-12" />
+                        <a href="{{ route('profile.home', $user->username) }}">
+                            <x-avatar wire:ignore src="https://source.unsplash.com/500x500?face-{{$key}}" class="h-12 w-12" />
+                        </a>
 
                         <div class="grid grid-cols-7 w-full gap-2">
                             <div class="col-span-5">
-                                <h5 class="font-semibold truncate text-sm">{{ $user->name }}</h5>
+                                <a href="{{ route('profile.home', $user->username) }}" class="font-semibold truncate text-sm">{{ $user->name }}</a>
                                 <p class="text-xs truncate" wire:ignore>Followed by {{ fake()->name }}</p>
                             </div>
 
