@@ -31,7 +31,7 @@ class Reels extends Component
     {
         $this->user = User::whereUsername($this->user->username)->withCount(['followers', 'followings', 'posts'])->firstOrFail();
 
-        $posts = $this->user->posts()->where('type', 'post')->get();
+        $posts = $this->user->posts()->where('type', 'reel')->get();
 
         return view('livewire.profile.reels', [
             'posts' => $posts

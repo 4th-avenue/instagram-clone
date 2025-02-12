@@ -112,10 +112,9 @@
     <section class="border-t">
         <ul class="grid grid-cols-3 gap-4 max-w-sm mx-auto pb-3 ">
             {{-- Posts --}}
-            <li class="flex items-center gap-2 py-2 cursor-pointer  {{request()->routeIs('profile.home')?'border-t border-black':''}}">
+            <li class="flex items-center gap-2 py-2 cursor-pointer {{ request()->routeIs('profile.home') ? 'border-t border-black' : '' }}">
                 {{-- border icon from bootsrap icons --}}
-                <a wire:navigate  class="flex items-center gap-2 py-2 cursor-pointer"
-                href="{{route('profile.home',$user->username)}}">
+                <a wire:navigate class="flex items-center gap-2 py-2 cursor-pointer" href="{{ route('profile.home', $user->username) }}">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-border-all lg:w-5 lg:h-5" viewBox="0 0 16 16">
@@ -128,10 +127,10 @@
                 </a>
             </li>
 
-            {{-- reels --}}
-            <li  class="flex items-center gap-2 py-2 cursor-pointer {{request()->routeIs('profile.reels')?'border-t border-black':''}} ">
+            {{-- Reels --}}
+            <li class="flex items-center gap-2 py-2 cursor-pointer {{ request()->routeIs('profile.reels') ? 'border-t border-black' : '' }}">
                 {{-- border icon from bootsrap icons --}}
-                <a wire:navigate class="flex items-center gap-2 py-2 cursor-pointer" href="#">
+                <a wire:navigate class="flex items-center gap-2 py-2 cursor-pointer" href="{{ route('profile.reels', $user->username) }}">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" id="instagram-reel">
                             <path fill="currentColor" fill-rule="evenodd"
@@ -151,12 +150,11 @@
             </li>
 
             @auth
-                @if ( auth()->user()->id==$user->id)
+                @if (auth()->user()->id == $user->id)
                     {{-- Saved --}}
-                    <li class="flex items-center gap-2 py-2 cursor-pointer {{request()->routeIs('profile.saved')?'border-t border-black':''}}">
+                    <li class="flex items-center gap-2 py-2 cursor-pointer {{ request()->routeIs('profile.saved') ? 'border-t border-black' : ''}}">
                         {{-- Tag icon from bootsrap icons --}}
-                        <a wire:navigate class="flex items-center gap-2 py-2 cursor-pointer"
-                        href="#">
+                        <a wire:navigate class="flex items-center gap-2 py-2 cursor-pointer" href="{{ route('profile.saved', $user->username) }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-bookmark lg:w-5 lg:h-5" viewBox="0 0 16 16">

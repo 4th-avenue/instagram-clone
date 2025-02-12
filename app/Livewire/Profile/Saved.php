@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Profile;
 
+use App\Models\Post;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -31,7 +32,7 @@ class Saved extends Component
     {
         $this->user = User::whereUsername($this->user->username)->withCount(['followers', 'followings', 'posts'])->firstOrFail();
 
-        $posts = $this->user->posts()->where('type', 'post')->get();
+        $posts = $this->user->getFavoriteItems(Post::class)->get();
 
         return view('livewire.profile.saved', [
             'posts' => $posts
