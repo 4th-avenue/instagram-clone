@@ -9,7 +9,7 @@ use Livewire\Component;
 class Item extends Component
 {
     public Post $post;
-    
+
     public $body;
     public $parent_id = null;
 
