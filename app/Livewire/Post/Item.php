@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use Livewire\Component;
 use App\Notifications\PostLikedNotification;
+use App\Notifications\NewCommentNotification;
 
 class Item extends Component
 {
@@ -45,7 +46,7 @@ class Item extends Component
         ]);
 
         // create comment
-        Comment::create([
+        $comment = Comment::create([
             'body' => $this->body,
             'commentable_id' => $this->post->id,
             'commentable_type' => Post::class,
@@ -53,6 +54,9 @@ class Item extends Component
         ]);
 
         $this->reset('body');
+
+        // notify user 
+        $this->post->user->notify(new NewCommentNotification(auth()->user(), $comment));
     }
 
     public function render()
