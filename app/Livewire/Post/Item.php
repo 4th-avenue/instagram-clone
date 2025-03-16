@@ -19,9 +19,11 @@ class Item extends Component
         abort_unless(auth()->check(), 401);
         auth()->user()->toggleLike($this->post);
 
-        #send notification is post is liked
+        // send notification is post is liked
         if ($this->post->isLikedBy(auth()->user())) {
-            $this->post->user->notify(new PostLikedNotification(auth()->user(), $this->post));
+            if ($this->post->user_id != auth()->id()) {
+                $this->post->user->notify(new PostLikedNotification(auth()->user(), $this->post));
+            }
         }
     }
 
@@ -56,7 +58,9 @@ class Item extends Component
         $this->reset('body');
 
         // notify user 
-        $this->post->user->notify(new NewCommentNotification(auth()->user(), $comment));
+        if ($this->post->user_id != auth()->id()) {
+            $this->post->user->notify(new NewCommentNotification(auth()->user(), $comment));
+        }
     }
 
     public function render()
