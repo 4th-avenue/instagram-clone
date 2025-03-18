@@ -4,6 +4,7 @@ use App\Livewire\Home;
 use App\Livewire\Reels;
 use App\Livewire\Explore;
 use App\Livewire\Profile\Saved;
+use App\Livewire\Post\View\Page;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Profile\Home as ProfileHome;
 use App\Livewire\Profile\Reels as ProfileReels;
@@ -16,6 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', Home::class)->name('/');
     Route::get('explore', Explore::class)->name('explore');
     Route::get('reels', Reels::class)->name('reels');
+
+    Route::get('post/{post}', Page::class)->name('post');
 
     // Route::view('profile', 'profile'->name('profile');
     Route::get('profile/{user}', ProfileHome::class)->name('profile.home');
