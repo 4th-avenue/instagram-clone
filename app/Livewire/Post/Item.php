@@ -5,6 +5,7 @@ namespace App\Livewire\Post;
 use App\Models\Post;
 use App\Models\Comment;
 use Livewire\Component;
+use App\Events\TestNotification;
 use App\Notifications\PostLikedNotification;
 use App\Notifications\NewCommentNotification;
 
@@ -23,6 +24,13 @@ class Item extends Component
         if ($this->post->isLikedBy(auth()->user())) {
             if ($this->post->user_id != auth()->id()) {
                 $this->post->user->notify(new PostLikedNotification(auth()->user(), $this->post));
+
+                event(new TestNotification([
+                    'user_id' => auth()->id(),
+                    'post_id' => $this->post->id,
+                    // 'id' => ,
+                    // 'type' => ,
+                ]));
             }
         }
     }
