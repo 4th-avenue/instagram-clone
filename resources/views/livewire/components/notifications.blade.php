@@ -1,4 +1,12 @@
-<div class="w-full p-3">
+<div
+x-init="
+Echo.private('users.{{ auth()->user()->id }}')
+    .listen('.notification', (notification) => {
+        // alert('reached');
+        @this.$refresh();
+    });
+"
+class="w-full p-3">
     {{-- The best athlete wants his opponent at his best. --}}
     <h3 class="font-bold text-4xl">Notifications</h3>
 

@@ -28,6 +28,7 @@ class Item extends Component
                 event(new TestNotification([
                     'user_id' => auth()->id(),
                     'post_id' => $this->post->id,
+                    'post_owner_id' => $this->post->user_id,
                     // 'id' => ,
                     // 'type' => ,
                 ]));

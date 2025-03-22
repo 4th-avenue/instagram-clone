@@ -32,12 +32,12 @@ class TestNotification implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('notification');
+        return new PrivateChannel('users.' . $this->data['post_owner_id']);
     }
 
     public function broadcastAs()
     {
-        return 'test.notification';
+        return 'notification';
     }
 
     public function broadcastWith(): array
